@@ -1,6 +1,6 @@
 # ChartJs Fluent API With MVC HtmlHelper
 
-![alt text](https://raw.githubusercontent.com/SaberFatholahi/ChartJsMVC/edit/master/chart.png)
+!https://github.com/SaberFatholahi/ChartJsMVC/blob/master/chart.png
 
 # Licence
 
