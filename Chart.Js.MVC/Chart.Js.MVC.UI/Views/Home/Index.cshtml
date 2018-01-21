@@ -1,0 +1,174 @@
+﻿@using Chart.Js.MVC.Component
+@using Chart.Js.MVC.Helpers
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width"/>
+	<title>Index</title>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<script src="~/Scripts/Chart.min.js"></script>
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div>
+	<div class="container">
+		<div class="col-xs-6">
+			@Html.Component().BarChart().Name("bar-chart").Height("450").Width("800").Title("Bar Chart").Options(option =>
+			{
+				option.Legend(legend => legend.Display(true));
+				option.Title(title => title.Display(true).Text("Predicted world population (millions) in 2050"));
+				option.Scales(scale => scale.XAxes(x => x.Ticks(tick => tick.FontFamily("B Sina"))));
+			}).Labels(labels => labels.AddDynamicList("Africa", "Asia", "Europe", "Latin America", "North America")).Datasets(datasets =>
+			{
+				datasets.Add().Label("Population (millions)").Data(data => data.AddDynamicList(2478, 5267, 734, 784, 433)).BackgroundColors("#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850");
+			})
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().LineChart().Name("LineChart").Width("800").Height("450").State(ComponentState.Info).Title("Line Chart").Options(x =>
+
+			{
+				x.Legend(legend => legend.Display(true).Label(label => label.FontFamily("B Titr")));
+				x.Tooltips(tooltip => tooltip.BackgroundColor("#ff00f0").TitleFontFamily("B Titr").BodyFontFamily("B Titr"));
+				x.Animation(animation => animation.Duration(1000).EasingAnimation(EasingAnimation.EaseOutQuint));
+				x.Title(t => t.Display(true).FontFamily("B Titr").Text("عنوان تستی"));
+				x.Scales(s => s.YAxes(y =>
+				{
+					y.ScaleLabel(lbl => lbl.Display(true).Text("مقدار").FontFamily("B Titr"));
+					y.Ticks(ticks => ticks.FontFamily("B Titr").FontColor("#ff0000"));
+				}));
+			}).Labels(labels => labels.AddDynamicList("1500", "1600", "1700", "1750", "1800", "1850", "1900", "1950", "1999", "2050")).Datasets(datasets =>
+			{
+				datasets.Add().Label("Africa").BorderColor("#3e95cd").Data(data => data.AddDynamicList(86, 114, 106, 106, 107, 111, 133, 221, 783, 2478));
+				datasets.Add().Label("Asia").BorderColor("#8e5ea2").Data(data => data.AddDynamicList(282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267));
+				datasets.Add().Label("Europe").BorderColor("#3cba9f").Data(data => data.AddDynamicList(168, 170, 178, 190, 203, 276, 408, 547, 675, 734));
+				datasets.Add().Label("Latin America").BorderColor("#e8c3b9").Data(data => data.AddDynamicList(40, 20, 10, 16, 24, 38, 74, 167, 508, 784));
+				datasets.Add().Label("North America").BorderColor("#c45850").Data(data => data.AddDynamicList(6, 3, 2, 2, 7, 26, 82, 172, 312, 433));
+			})
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().LineChart().Name("AreaChart").Width("800").Height("450").State(ComponentState.Info).Title("Area Chart").Options(x =>
+			{
+				x.Tooltips(tooltip => tooltip.BackgroundColor("#ff00f0").TitleFontColor("B Titr"));
+				x.Animation(animation => animation.Duration(1000).EasingAnimation(EasingAnimation.EaseOutQuint));
+				x.Title(t => t.Display(true).FontFamily("B Yekan").Text("عنوان تستی"));
+				x.Scales(s => s.YAxes(y => y.ScaleLabel(lbl => lbl.Display(true).Text("مقدار").FontFamily("B Titr")).Ticks(tick => tick.UserCallbackFunction(@<script>function(tick) { return tick.toString() + " Test"; }</script>).FontFamily("B Titr").FontColor("#00ff00"))));
+			}).Labels(labels => labels.AddDynamicList("1500", "1600", "1700", "1750", "1800", "1850", "1900", "1950", "1999", "2050")).Datasets(datasets =>
+			{
+				datasets.Add().Fill(true).Label("Africa").BorderColor("#3e95cd").Data(data => data.AddDynamicList(86, 114, 106, 106, 107, 111, 133, 221, 783, 2478));
+				datasets.Add().Fill(true).Label("Asia").BorderColor("#8e5ea2").Data(data => data.AddDynamicList(282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267));
+				datasets.Add().Fill(true).Label("Europe").BorderColor("#3cba9f").Data(data => data.AddDynamicList(168, 170, 178, 190, 203, 276, 408, 547, 675, 734));
+				datasets.Add().Fill(true).Label("Latin America").BorderColor("#e8c3b9").Data(data => data.AddDynamicList(40, 20, 10, 16, 24, 38, 74, 167, 508, 784));
+				datasets.Add().Fill(true).Label("North America").BorderColor("#c45850").Data(data => data.AddDynamicList(6, 3, 2, 2, 7, 26, 82, 172, 312, 433));
+			})
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().PieChart().Name("pie-chart").Width("800").Height("450").State(ComponentState.Info).Title("Pie Chart").Options(options =>
+			{
+				options.Title(title => title.Display(true).Text("چارت دایره ای"));
+				options.Animation(animation => animation.EasingAnimation(EasingAnimation.EaseInExpo));
+			}).Labels(labels => labels.AddDynamicList("Africa", "Asia", "Europe", "Latin America", "North America")).Datasets(datasets =>
+			{
+				datasets.Add().Label("آمار بیکاری").Data(data => data.AddDynamicList(2478, 5267, 734, 784, 433)).BackgroundColors("#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850");
+			})
+
+
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().RadarChart().Name("radar-chart").Width("800").Height("600").State(ComponentState.Info).Title("Radar Chart").Options(options =>
+			{
+				options.Title(title => title.Display(true).Text("توزیع جمعیت در جهان بر اساس درصد"));
+			}).Labels(labels => labels.AddDynamicList("Africa", "Asia", "Europe", "Latin America", "North America")).Datasets(datasets =>
+			{
+				datasets.Add().Label("1950").Fill(true).Data(data => data.AddDynamicList(8.77, 55.61, 21.69, 6.62, 6.82)).PointBorderColor("#fff").BackgroundColor("rgba(179,181,198,0.2)").BorderColor("rgba(179,181,198,1)").PointBackgroundColor("rgba(179,181,198,1)");
+				datasets.Add().Label("2050").Fill(true).Data(data => data.AddDynamicList(25.48, 54.16, 7.61, 8.06, 4.45)).PointBorderColor("#fff").BackgroundColor("rgba(255,99,132,0.2)").BorderColor("rgba(255,99,132,1)").PointBackgroundColor("rgba(255,99,132,1)");
+			})
+
+
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().PolarAreaChart().Name("polar-chart").Width("800").Height("450").State(ComponentState.Info).Title("Polar Area Chart").Options(options =>
+			{
+				options.Title(title => title.Display(true).Text("Predicted world population (millions) in 2050"));
+			}).Labels(labels => labels.AddDynamicList("Africa", "Asia", "Europe", "Latin America", "North America")).Datasets(datasets =>
+			{
+				datasets.Add().Label("Population (millions)").Data(data => data.AddDynamicList(2478, 5267, 734, 784, 433)).BackgroundColors("#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850");
+			})
+
+
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().DoughnutChart().Name("doughnut-chart").Width("800").Height("450").State(ComponentState.Info).Title("Doughnut Chart").Options(options =>
+			{
+				options.Legend(legend => legend.Position(Position.Bottom));
+				options.Title(title => title.Display(true).Text("چارت دونات"));
+			}).Labels(labels => labels.AddDynamicList("Africa", "Asia", "Europe", "Latin America", "North America")).Datasets(datasets =>
+			{
+				datasets.Add().Label("آمار بیکاری").Data(data => data.AddDynamicList(2478, 5267, 734, 784, 433)).BackgroundColors("#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850");
+			})
+
+
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().HorizontalBarChart().Name("bar-chart-horizontal").Title("Horizontal Bar Chart").Width("800").Height("450").Options(option =>
+			{
+				option.Legend(legend => legend.Display(true));
+				option.Title(title => title.Display(true).Text("Horizontal Bar Chart"));
+			}).Labels(labels => labels.AddDynamicList("Africa", "Asia", "Europe", "Latin America", "North America")).Datasets(datasets =>
+			{
+				datasets.Add().Label("Population (millions)").Data(data => data.AddDynamicList(2478, 5267, 734, 784, 433)).BackgroundColors("#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850");
+			})
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().BarChart().Name("bar-chart-grouped").Title("Bar Chart Grouped").Width("800").Height("450").Options(option =>
+			{
+				option.Legend(legend => legend.Display(true));
+				option.Title(title => title.Display(true).Text("Population growth (millions)"));
+			}).Labels(labels => labels.AddDynamicList("1900", "1950", "1999", "2050")).Datasets(datasets =>
+			{
+				datasets.Add().Label("Africa").Data(data => data.AddDynamicList(133, 221, 783, 2478)).BackgroundColor("#3e95cd");
+				datasets.Add().Label("Europe").Data(data => data.AddDynamicList(408, 547, 675, 734)).BackgroundColor("#8e5ea2");
+			})
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().BarChart().Name("mixed-chart").Title("Mixed Chart").Height("450").Width("800").Options(option =>
+			{
+				option.Legend(legend => legend.Display(true));
+				option.Title(title => title.Display(true).Text("Population growth (millions): Europe & Africa"));
+			}).Labels(labels => labels.AddDynamicList("1900", "1950", "1999", "2050")).Datasets(datasets =>
+			{
+				datasets.Add().Label("Europe").ChartType(ChartType.Line).Fill(false).Data(data => data.AddDynamicList(408, 547, 675, 734)).BorderColor("#8e5ea2");
+				datasets.Add().Label("Africa").ChartType(ChartType.Line).Fill(false).Data(data => data.AddDynamicList(133, 221, 783, 2478)).BorderColor("#3e95cd");
+				datasets.Add().Label("Europe").ChartType(ChartType.Bar).Data(data => data.AddDynamicList(408, 547, 675, 734)).BackgroundColor("rgba(0,0,0,0.2)");
+				datasets.Add().Label("Africa").ChartType(ChartType.Bar).Data(data => data.AddDynamicList(133, 221, 783, 2478)).BackgroundColor("rgba(0,0,0,0.2)").HoverBackgroundColor("#3e95cd");
+			})
+		</div>
+		<div class="col-xs-6">
+			@Html.Component().BubbleChart().Name("bubble-chart").Title("Bubble Chart").Height("800").Width("800").Options(option =>
+			{
+				option.Title(title => title.Display(true).Text("Predicted world population (millions) in 2050"));
+				option.Scales(scales =>
+				{
+					scales.YAxes(y => y.ScaleLabel(label => label.Display(true).Text("Happiness")));
+					scales.XAxes(y => y.ScaleLabel(label => label.Display(true).Text("GDP (PPP)")));
+				});
+
+			}).Labels(labels => labels.Add("Africa")).Datasets(datasets =>
+			{
+				datasets.Add().Labels("China").BackgroundColor("rgba(255,221,50,0.2)").BorderColor("rgba(255,221,50,1)").Data(data => data.Add(new { x = 21269017, y = 5.245, r = 15 }));
+				datasets.Add().Labels("Denmark").BackgroundColor("rgba(60,186,159,0.2)").BorderColor("rgba(60,186,159,1)").Data(data => data.Add(new { x = 258702, y = 7.526, r = 10 }));
+				datasets.Add().Labels("Germany").BackgroundColor("rgba(0,0,0,0.2)").BorderColor("#000").Data(data => data.Add(new { x = 3979083, y = 6.994, r = 15 }));
+				datasets.Add().Labels("Japan").BackgroundColor("rgba(193,46,12,0.2)").BorderColor("rgba(193,46,12,1)").Data(data => data.Add(new { x = 4931877, y = 5.921, r = 15 }));
+			})
+		</div>
+	</div>
+</div>
+@Html.RenderScripts()
+</body>
+</html>
