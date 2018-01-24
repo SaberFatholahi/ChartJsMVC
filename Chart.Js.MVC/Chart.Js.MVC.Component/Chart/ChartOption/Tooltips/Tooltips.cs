@@ -241,6 +241,13 @@ namespace Chart.Js.MVC.Component
 		public int? BorderWidth { get; set; }
 
 		/// <summary>
+		/// Gets or sets the callbacks.
+		/// </summary>
+		/// <value>The callbacks.</value>
+		[JsonProperty(PropertyName = "callbacks")]
+		public Callbacks Callbacks { get; set; }
+
+		/// <summary>
 		/// Gets or sets the on item sort.
 		/// </summary>
 		/// <value>The on item sort.</value>
@@ -255,5 +262,13 @@ namespace Chart.Js.MVC.Component
 		[JsonProperty(PropertyName = "filter")]
 		[JsonConverter(typeof(FunctionConverter))]
 		public Func<object, HelperResult> OnFilter { get; set; }
+
+		/// <summary>
+		/// Gets or sets the custom.
+		/// </summary>
+		/// <value>The custom.</value>
+		[JsonProperty(PropertyName = "custom")]
+		[JsonConverter(typeof(FunctionConverter))]
+		public Func<object, HelperResult> Custom { get; set; }
 	}
 }

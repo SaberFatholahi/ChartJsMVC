@@ -125,6 +125,8 @@
     <Compile Include="Chart\ChartOption\SteppedLine.cs" />
     <Compile Include="Chart\ChartOption\Title\Title.cs" />
     <Compile Include="Chart\ChartOption\Title\TitleBuilder.cs" />
+    <Compile Include="Chart\ChartOption\Tooltips\Callbacks.cs" />
+    <Compile Include="Chart\ChartOption\Tooltips\CallbacksBuilder.cs" />
     <Compile Include="Chart\ChartOption\Tooltips\Tooltips.cs" />
     <Compile Include="Chart\ChartOption\Tooltips\TooltipsBuilder.cs" />
     <Compile Include="Chart\ChartRenderer.cs" />

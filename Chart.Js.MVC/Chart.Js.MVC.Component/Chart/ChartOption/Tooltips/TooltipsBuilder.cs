@@ -397,5 +397,25 @@ namespace Chart.Js.MVC.Component
 			_component.OnItemSort = value;
 			return this;
 		}
+
+		/// <summary>
+		/// Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own custom way. Generally this is used to create an HTML tooltip instead of an oncanvas one. 
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>TooltipsBuilder.</returns>
+		public TooltipsBuilder CustomToolTip(Func<object, HelperResult> value)
+		{
+			_component.Custom = value;
+			return this;
+		}
+
+		public TooltipsBuilder Callbacks(Action<CallbacksBuilder> action)
+		{
+			_component.Callbacks = _component.Callbacks ?? new Callbacks();
+			
+			var factory = new CallbacksBuilder(_component.Callbacks);
+			action(factory);
+			return this;
+		}
 	}
 }
